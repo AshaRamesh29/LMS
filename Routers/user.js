@@ -1,5 +1,6 @@
 const express = require('express');
-const User = require('../Models/user')
+const User = require('../Models/user');
+const auth= require('../Middleware/auth')
 require('../db/mongoose');
 const router = new express.Router();
 
@@ -16,7 +17,7 @@ catch(e){
 }
 })
 
-const userLogin = router.post('/api/login',async (req,res)=>{
+const userLogin = router.post('/api/login',auth,async (req,res)=>{
 try{
     console.log('user',req.body)
     const user = new User(req.body);
